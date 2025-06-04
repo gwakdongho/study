@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+double totalscore(double tot[], int size)
+{
+		double total = 0;
+	for (int i = 0; i < size; i++) {
+		total += tot[i];
+	}
+	return total;
+}
+
+double totalavg(double tot[], int size)
+{
+	double total = 0;
+	for (int i = 0; i < size; i++) {
+		total += tot[i];
+	}
+	return total / size;
+}
+
+int main()
+{
+	const int size = 5;
+	double scores[size] = {0};
+	for (int i = 0; i < size; i++) {
+		cout << i + 1 << "번째 학생의 점수: " << endl;
+		cin >> scores[i];
+	}
+	double total = totalscore(scores, size);
+	double average = totalavg(scores, size);
+	cout << "Total Score: " << total << endl;
+	cout << "Average Score: " << average << endl;
+	return 0;
+}
