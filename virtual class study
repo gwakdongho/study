@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Animal
+{
+public:
+	virtual void makesound() = 0;
+};
+
+
+class Dog : public Animal
+{
+public:
+	void makesound()
+	{
+		cout << "멍멍 ~" << endl;
+	}
+};
+
+
+class Cat : public Animal
+{
+public:
+	void makesound()
+	{
+		cout << "냥냥 ~" << endl;
+	}
+};
+
+
+class Cow : public Animal
+{
+public:
+	void makesound()
+	{
+		cout << "음모 ~" << endl;
+	}
+};
+
+
+int main()
+{
+	Animal* animals[3];
+
+	Dog d;
+		d.makesound();
+	Cat t;
+		t.makesound();
+	Cow w;
+		w.makesound();
+}
