@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class SimpleVector
+{
+private:
+	T* data;
+	int currentsize;
+	int currentcapacity;
+
+public:
+	SimpleVector()
+	{
+		data = new T[10];
+		currentsize = 0;
+		currentcapacity = 10;
+	}
+
+	SimpleVector(int capacity)
+	{
+		data = new T[capacity];
+		currentsize = 0;
+		currentcapacity = capacity;
+	}
+
+	~SimpleVector()
+	{
+		delete[] data;
+		data = nullptr;
+	}
+
+
+	void push_back(const T& value)
+	{
+		if (currentsize >= currentcapacity)
+		{
+			return;
+		}
+		data[currentsize] = value;
+		++currentsize;
+	}
+
+	void pop_back()
+	{
+		if (currentsize > 0)
+		{
+			--currentsize;
+		}
+	}
+
+	int size() const
+	{
+		return currentsize;
+	}
+
+	int capacity() const
+	{
+		return currentcapacity;
+	}
+
+	T& operator[](int index)
+	{
+		return data[index];
+	}
+};
+
+int main()
+{
+	SimpleVector<int> sv1;
+
+	sv1.push_back(5);
+	sv1.push_back(6);
+	sv1.push_back(7);
+
+	sv1.pop_back();
+
+	for (int i = 0; i < sv1.size(); i++)
+	{
+		cout << "벡터 1의: " << i << "번째 요소 " << sv1[i] << endl;
+	}
+
+	cout << "벡터 1의 크기: " << sv1.size() << endl;
+	cout << "벡터 1의 용량: " << sv1.capacity() << endl;
+}
