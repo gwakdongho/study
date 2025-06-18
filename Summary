@@ -1,0 +1,128 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstdlib>
+
+using namespace std;
+
+//-책 제목으로 검색이 가능해야 합니다.
+//- 작가로 검색이 가능해야 합니다.
+//- 책 제목이 동일한 경우는 없다고 가정 합니다.
+
+struct Book
+{
+	string title;
+	string author;
+};
+
+vector<Book> library;
+
+void addBook(const string& title, const string& author)
+{
+	library.push_back({ title, author });
+	cout << "[추가]책: " << title << ", 저자: " << author << "\n";
+}
+
+void searchtitle(const string& title)
+{
+	for (const auto& book : library)
+	{
+		if (book.title == title)
+		{
+			cout << "[결과] 제목: " << book.title << ", 저자: " << book.author << "\n";
+			return;
+		}
+	}
+	cout << "그런 책은 없음.\n";
+}
+
+void searchauthor(const string& author)
+{
+	bool found = false;
+	for (const auto& book : library)
+	{
+		if (book.author == author)
+		{
+			cout << "[결과]제목: " << book.title << ", 저자: " << book.author << "\n";
+			found = true;
+		}
+	}
+	if (!found)
+		cout << "걔 책은 없음\n";
+}
+
+void allbook()
+{
+	if (library.empty())
+	{
+		cout << "책이 없음\n";
+		return;
+	}
+	for (int i = 0; i < library.size(); i++)
+	{
+		cout << i + 1 << "제목: " << library[i].title << ", 저자: " << library[i].author << "\n";
+	}
+}
+
+int main()
+{
+	int choice;
+	string inputtitle, inputauthor;
+
+	while (true)
+	{
+		system("cls");
+
+		cout << "1. 책 추가\n";
+		cout << "2. 제목으로 검색\n";
+		cout << "3. 작가로 검색\n";
+		cout << "4. 전체 책 목록\n";
+		cout << "5. 프로그램 종료\n";
+		cout << "선택:";
+		cin >> choice;
+		cin.ignore();
+
+		if (choice == 1)
+		{
+			cout << "추가할 책의 제목:";
+			getline(cin, inputtitle);
+			cout << "추가할 책의 저자:";
+			getline(cin, inputauthor);
+			addBook(inputtitle, inputauthor);
+		}
+
+		else if (choice == 2)
+		{
+			cout << "검색할 책의 제목:";
+			getline(cin, inputtitle);
+			searchtitle(inputtitle);
+		}
+
+		else if (choice == 3)
+		{
+			cout << "검색할 책의 저자:";
+			getline(cin, inputauthor);
+			searchauthor(inputauthor);
+		}
+
+		else if (choice == 4)
+		{
+			allbook();
+		}
+
+		else if (choice == 5)
+		{
+			break;
+		}
+
+		else
+		{
+			cout << "님 잘못누름\n";
+		}
+
+		cout << "\n계속하려면 Enter 키 ㄱㄱ";
+		cin.get();
+	}
+
+	return 0;
+}
